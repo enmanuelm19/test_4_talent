@@ -10,14 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_23_191743) do
+ActiveRecord::Schema.define(version: 2018_07_24_153251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "benefits", force: :cascade do |t|
+    t.string "name"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "amount"
+    t.index ["company_id"], name: "index_benefits_on_company_id"
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "country_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "company_type"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "postulations", force: :cascade do |t|
+    t.string "name"
+    t.bigint "benefit_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["benefit_id"], name: "index_postulations_on_benefit_id"
+    t.index ["user_id"], name: "index_postulations_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,5 +65,8 @@ ActiveRecord::Schema.define(version: 2018_07_23_191743) do
     t.index ["city_id"], name: "index_weathers_on_city_id"
   end
 
+  add_foreign_key "benefits", "companies"
+  add_foreign_key "postulations", "benefits"
+  add_foreign_key "postulations", "users"
   add_foreign_key "weathers", "cities"
 end
