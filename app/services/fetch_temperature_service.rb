@@ -22,7 +22,6 @@ class FetchTemperatureService
     end
 
     def fetch_temperature
-      debugger
       response = call_api
       return if response['cod'] != '200'
       response['list']

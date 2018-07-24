@@ -8,19 +8,19 @@ module OpenweatherHelper
        	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
        	  'User-Agent'=>'Ruby'
            }).
-           to_return(status: 200, body: good_response.to_json, headers: {})
+           to_return(status: 200, body: good_response.to_json, headers: { 'Content-Type' => 'application/json'})
   end
 
   def unsuccess_fetch_temperatures
-    route = "https://api.openweathermap.org/data/2.5/forecast?appid=2593e60f12cc40a9b4ebd4d300e17f87&cnt=5&q=Santiago"
+    route = "https://api.openweathermap.org/data/2.5/forecast?appid=2593e60f12cc40a9b4ebd4d300e17f87&cnt=5&q=San%20Pablo"
     stub_request(:get, route).
-         with(
-           headers: {
-       	  'Accept'=>'*/*',
-       	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-       	  'User-Agent'=>'Ruby'
-           }).
-           to_return(status: 200, body: bad_response.to_json , headers: {})
+      with(
+        headers: {
+          'Accept'=>'*/*',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent'=>'Ruby'
+        }).
+        to_return(status: 200, body: bad_response.to_json, headers: { 'Content-Type'=>'application/json'})
   end
 
   def good_response
@@ -38,7 +38,7 @@ module OpenweatherHelper
       {"dt"=>1532487600,"main"=>{
         "temp"=>275.73,"temp_min"=>274.607,"temp_max"=>275.73,"pressure"=>952.7,"sea_level"=>1036.66,"grnd_level"=>952.7,"humidity"=>79,"temp_kf"=>1.13},
         "weather"=>[
-          {"id"=>800,"main"=>"Clear","description"=>"clear sky","icon"=>"01n"}
+          {"id"=>800, "main"=>"Clear","description"=>"clear sky","icon"=>"01n"}
         ],"clouds"=>{"all"=>0},"wind"=>{"speed"=>1.21,"deg"=>93.0018},"sys"=>{"pod"=>"n"},"dt_txt"=>"2018-07-25 03=>00=>00"},
       {"dt"=>1532498400,"main"=>{
           "temp"=>273.598,"temp_min"=>273.598,"temp_max"=>273.598,"pressure"=>952.63,"sea_level"=>1036.66,"grnd_level"=>952.63,"humidity"=>82,"temp_kf"=>0},

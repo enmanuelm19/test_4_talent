@@ -3,10 +3,16 @@ include OpenweatherHelper
 
 RSpec.describe FetchTemperatureService do
   describe 'perfom' do
-    it 'fetch city temperature' do
-      unsuccess_fetch_temperatures
+    it 'fetch last 5 city temperatures' do
+      success_fetch_temperatures
       temp = FetchTemperatureService.perform("Santiago")
-      expect(temp).to eq('289.14')  
+      expect(temp.length).to eq(5)
+    end
+
+    it 'does not fetch nothing' do
+      unsuccess_fetch_temperatures
+      temp = FetchTemperatureService.perform("San Pablo")
+      expect(temp).to be nil
     end
   end
 end
