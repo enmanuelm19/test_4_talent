@@ -1,4 +1,5 @@
 require 'rails_helper'
+include OpenweatherHelper
 
 RSpec.describe FetchTemperatureService do
   describe 'perfom' do
