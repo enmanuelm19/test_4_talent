@@ -1,0 +1,22 @@
+<section class="section">
+  <h1 class="title is-1">Ciudades</h1>
+  <hr>
+  <%= link_to "Obtener últimas temperaturas", fetch_temperatures_cities_path, class: 'button' %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Temperatura</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cities.each do |city| %>
+        <tr>
+          <td><%= city.name %></td>
+          <td><%= city.last_temperature || 'No se encuentran datos cargados.' %></td>
+          <td><%= link_to "Ver mas", city, class: 'button' %></td>
+      <% end %>
+    </tbody>
+  </table>
+</section>

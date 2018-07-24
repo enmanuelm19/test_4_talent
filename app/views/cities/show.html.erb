@@ -1,0 +1,21 @@
+<section class="section">
+  <h1 class="title is-1"><%= @city.name %> | <%= @city.country_code %></h1>
+
+  <h2 class="subtitle">Temperaturas</h2>
+  <hr>
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Temperatura</th>
+        <th>Fecha de consulta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @city.weathers.each do |weather| %>
+        <tr>
+          <td><%= weather.temp %></td>
+          <td><%= weather.created_at %></td>
+      <% end %>
+    </tbody>
+  </table>
+</section>
