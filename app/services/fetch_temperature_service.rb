@@ -23,11 +23,11 @@ class FetchTemperatureService
 
     def fetch_temperature
       response = call_api
-      return "N/A" if response['cod'] != 200
-      response['main']['temp']
+      return if response['cod'] != '200'
+      response['list']
     end
 
     def call_api
-      self.class.get('/weather', build_params)
+      self.class.get('/forecast', build_params)
     end
 end

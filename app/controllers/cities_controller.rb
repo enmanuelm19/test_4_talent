@@ -9,10 +9,14 @@ class CitiesController < ApplicationController
 
   def fetch_temperatures
     City.all.each do |city|
-      Weather.create(temp: FetchTemperatureService.perform(city.name), city: city)
+      temperatures = FetchTemperatureService.perform(city.name)
+      temperatures&.each do |temperature|
+        weather = Weather.find_or_initialize_by(time: temperature['dt'], city: city)
+        weather.temp = temperature['main']['temp']
+        weather.save
+      end
     end
-    @cities = City.all.includes(:weathers)
-    render :index
+    redirect_to cities_path
   end
 
   private

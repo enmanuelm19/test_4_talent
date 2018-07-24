@@ -14,7 +14,7 @@
       <% @city.weathers.each do |weather| %>
         <tr>
           <td><%= weather.temp %></td>
-          <td><%= weather.created_at %></td>
+          <td><%= Time.at(weather.time) %></td>
       <% end %>
     </tbody>
   </table>
