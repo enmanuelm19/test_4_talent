@@ -18,10 +18,11 @@ class FetchTemperatureService
   private
 
     def build_params
-      { query: { q: city_name, appid: '2593e60f12cc40a9b4ebd4d300e17f87' } }
+      { query: { q: city_name, appid: '2593e60f12cc40a9b4ebd4d300e17f87', cnt: '5' } }
     end
 
     def fetch_temperature
+      debugger
       response = call_api
       return if response['cod'] != '200'
       response['list']
